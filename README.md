@@ -30,8 +30,3 @@
 🔧 MVP in development – Contributions and feedback welcome!
 
 ## 💬 License
-MIT
-
----
-
-Would you like help customizing the layout for React Native or turning this into a portfolio project with issues, milestones, and tasks in GitHub Projects?
