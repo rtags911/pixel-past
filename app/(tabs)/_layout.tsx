@@ -1,13 +1,13 @@
 import React from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Link, Tabs } from "expo-router";
-import { Pressable } from "react-native";
+import { Tabs } from "expo-router";
+import "../../style/global.css";
 
-import Colors from "@/constants/Colors";
-import { useColorScheme } from "@/components/useColorScheme";
-import { useClientOnlyValue } from "@/components/useClientOnlyValue";
+import { Pressable } from "react-native";
+import AnimatedTabIcon from "@/components/tabs/pill";
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
+
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>["name"];
   color: string;
@@ -16,43 +16,99 @@ function TabBarIcon(props: {
 }
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
-        // Disable the static render of the header on web
-        // to prevent a hydration error in React Navigation v6.
-        headerShown: useClientOnlyValue(false, true),
+        headerShown: false,
+        tabBarShowLabel: false,
+        tabBarItemStyle: {
+          justifyContent: "center",
+          alignItems: "center",
+          alignContent: "center",
+          marginTop: 6,
+          marginLeft: 3,
+          marginRight: 3,
+        },
+        tabBarStyle: {
+          backgroundColor: "#d3c4e3",
+          borderRadius: 50,
+          marginBottom: 36,
+          marginHorizontal: 20,
+          height: 52,
+          position: "absolute",
+          overflow: "hidden",
+          borderWidth:1,
+          borderColor:'transparent'
+        },
+
+        // tabBarButton: (props) => (
+        //   <Pressable
+        //     {...props}
+        //     android_ripple={{ color: "transparent" }}
+        //     className="active:opacity-100"
+        //   />
+        // ),
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
-          title: "Tab One",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? "light"].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
+          title: "Home",
+          tabBarIcon: ({ focused }) => (
+            <AnimatedTabIcon
+              iconName="home"
+              pillBg="#8f95d3"
+              iconColor="black"
+              label="Home"
+              isFocused={focused}
+            />
           ),
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="search"
         options={{
-          title: "Tab Two",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "Search",
+          tabBarIcon: ({ focused }) => (
+            <AnimatedTabIcon
+              iconName="search"
+              pillBg="#8f95d3"
+              iconColor="black"
+              label="Search"
+              isFocused={focused}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="saved"
+        options={{
+          title: "Saved",
+          tabBarIcon: ({ focused }) => (
+            <AnimatedTabIcon
+              iconName="bookmark"
+              pillBg="#8f95d3"
+              iconColor="black"
+              label="Saved"
+              isFocused={focused}
+            />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+          tabBarIcon: ({ focused }) => (
+            <AnimatedTabIcon
+              iconName="person-circle"
+              pillBg="#8f95d3"
+              iconColor="black"
+              label="Profile"
+              isFocused={focused}
+            />
+          ),
         }}
       />
     </Tabs>
